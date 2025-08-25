@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="bereshitquiz.css">
+</head>
+<body>
+    <div class="intro-div">
+        <p class="intro">Quiz App</p>
+    </div>
+    <div class="quiz-questions">
+        <div id="question" class="question" style="margin-top:20px; font-weight:bold; color: white;">
+        </div>
+        <br>
+        <div class="answers">
+            <div class="option1div">
+                <button id="option1" class="option-btn" onclick="
+                    handleAnswer(this)
+                ">
+                </button>
+            </div>
+            <div class="option2div">
+                <button id="option2" class="option-btn" onclick="
+                    handleAnswer(this)
+                    ">
+                </button>
+            </div>
+            <div class="option3div">
+                <button id="option3" class="option-btn" onclick="
+                    handleAnswer(this)
+                    ">
+                </button>
+            </div>
+            <div class="option4div">
+                <button id="option4" class="option-btn" onclick="
+                    handleAnswer(this)
+                    ">
+                </button>
+            </div>
+        </div>
+
+        <div id="scoreDisplay" style="margin-top:20px; font-weight:bold; color: white;">
+            Correct Answers: 0
+        </div>
+    </div>
+
+    <script>
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+
+        const quizData = [
+            {
+                question: "Who told who: “They are my sons, whom God has given me here.”",
+                options: ["Yaakov to Parho", "Yaakov to Itzjak", "Joseph to Yaakov", "Rivka to Laban"],
+                correct: "Joseph to Yaakov"
+            },
+            {
+                question: "Who was it said about: Your hand shall be on the nape of your foes; Your father’s sons shall bow low to you.",
+                options: ["Yehuda", "Shimon", "Levi", "Asher"],
+                correct: "Yehuda"
+            },
+            {
+                question: "Who told who: I am a shield to you; Your reward shall be very great.",
+                options: ["H' to Yaakov", "H' to Abraham", "Lavan to yaakov", "H' to Itzjak"],
+                correct: "H' to Abraham"
+            },
+            {
+                question: "Who was it said about:  ___ went on his way, and messengers of God encountered him.",
+                options: ["Yehuda", "Noaj", "Abraham", "Yaakov"],
+                correct: "Yaakov"
+            },
+            {
+                question: "Where did Sarah die?",
+                options: ["On the way to Bet-El", "Kiriat Arba", "Goshen", "Dotan"],
+                correct: "Kiriat Arba"
+            }
+        ];
+
+        function loadQuestion() {
+            if (currentQuestionIndex < quizData.length) {
+                const current = quizData[currentQuestionIndex];
+                document.getElementById("question").textContent = current.question;
+                document.getElementById("option1").textContent = current.options[0];
+                document.getElementById("option2").textContent = current.options[1];
+                document.getElementById("option3").textContent = current.options[2];
+                document.getElementById("option4").textContent = current.options[3];
+            } else {
+                document.getElementById("question").textContent = "Quiz Finished!";
+                document.querySelector(".answers").style.display = "none";
+            }
+        }
+
+        function updateScore() {
+            document.getElementById("scoreDisplay").textContent = `Correct Answers: ${correctAnswers}`;
+        }
+
+        function handleAnswer(btn) {
+            const selected = btn.textContent;
+            const current = quizData[currentQuestionIndex];
+
+            if (selected === current.correct) {
+                correctAnswers++;
+                btn.classList.add("correct");
+            } else {
+                btn.classList.add("incorrect");
+            }
+
+            updateScore();
+            setTimeout(() => {
+                btn.classList.remove("correct", "incorrect");
+                currentQuestionIndex++;
+                loadQuestion();
+            }, 600);
+        }
+        loadQuestion();
+    </script>
+</body>
+</html>

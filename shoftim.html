@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="shoftim.css">
+    <title>Shoftim</title>
+</head>
+<body>
+    <p class="select">Select a Chapter:</p>
+    <div id="shoftim-buttons"></div>
+    <div id="content"></div>
+
+    <script>
+        const container = document.getElementById("shoftim-buttons");
+        const contentDiv = document.getElementById("content");
+        let currentChapter = null;
+
+        // Create chapter buttons
+        for (let i = 1; i <= 21; i++) {
+            const button = document.createElement("button");
+            button.textContent = i;
+            button.className = `chapter-button`;
+            button.dataset.chapter = i;
+            button.addEventListener('click', () => loadChapter(i));
+            container.appendChild(button);
+        }
+
+        async function loadChapter(chapterNum) {
+            // Update active button
+            document.querySelectorAll('.chapter-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-chapter="${chapterNum}"]`).classList.add('active');
+
+            // Show loading
+            contentDiv.innerHTML = '<div class="loading">Loading chapter...</div>';
+            currentChapter = chapterNum;
+
+            try {
+                // Fetch from Sefaria API
+                const response = await fetch(`https://www.sefaria.org/api/texts/Judges.${chapterNum}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Display the chapter
+                displayChapter(data, chapterNum);
+                
+            } catch (error) {
+                contentDiv.innerHTML = `
+                    <div class="error">
+                        <p>Error loading chapter ${chapterNum}</p>
+                        <p>${error.message}</p>
+                        <button onclick="loadChapter(${chapterNum})">Try Again</button>
+                    </div>
+                `;
+            }
+        }
+
+        function displayChapter(data, chapterNum) {
+            const hebrew = data.he || [];
+            
+            let html = `
+                <div class="back-button">
+                    <button onclick="showChapterSelection()">← Back to Chapter Selection</button>
+                </div>
+                <div class="chapter-title">
+                    פרק ${chapterNum}
+                </div>
+            `;
+
+            // Display verses
+            for (let i = 0; i < hebrew.length; i++) {
+                const verseNum = i + 1;
+                const hebrewVerse = hebrew[i] || '';
+                
+                html += `
+                    <div class="verse">
+                        <span class="verse-number">${verseNum}.</span>
+                        <span style="direction: rtl; text-align: right;">${hebrewVerse}</span>
+                    </div>
+                `;
+            }
+
+            contentDiv.innerHTML = html;
+            
+            // Scroll to top of content
+            contentDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showChapterSelection() {
+            contentDiv.innerHTML = '';
+            currentChapter = null;
+            document.querySelectorAll('.chapter-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Optional: Load a chapter from URL parameter
+        function loadFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const chapter = urlParams.get('chapter');
+            if (chapter && chapter >= 1 && chapter <= 21) {
+                loadChapter(parseInt(chapter));
+            }
+        }
+
+        // Load from URL on page load
+        loadFromURL();
+    </script>
+</body>
+</html>

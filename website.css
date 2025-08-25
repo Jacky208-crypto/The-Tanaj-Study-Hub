@@ -1,0 +1,125 @@
+button {
+    background-color:rgb(3, 0, 56);
+    color: white;
+    border: none;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-left: 33px;
+    padding-right: 33px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 8px;
+    transition: opacity 0.15s, box-shadow 0.15s;
+    margin-bottom: 12px;
+}
+
+button:hover{
+    opacity: 0.7;
+    box-shadow: 4px 4px 10px rgba(3, 0, 56, 0.6)
+    
+}
+
+
+.link {
+    color: rgb(4, 4, 84);
+    text-align: center;
+}
+.title {
+    font-family: Arial;
+    font-size: 30px;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 30px;
+}
+
+.subtext {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-align: center;
+    color: rgb(40, 40, 40);
+    margin-top: 3px;
+}
+.torah {
+    display: inline-block;
+    align-content: center;
+
+}
+.neviim {
+    display: inline-block;
+    align-content: center;
+
+}
+.ketuvim {
+    display: inline-block;
+    align-content: center;
+
+}
+body {
+    background-color: #fef6e4;
+    justify-content: center;
+    align-items: center;
+}
+.write {
+    display: block;
+}
+
+.read {
+    
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+}
+
+.questions {
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+    
+}
+.notes {
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+}
+.control {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+}
+
+.sefaria {
+    display: flex;
+    justify-content: center;
+    bottom: 10px;
+}
+@media (max-width: 600px) {
+    .control {
+        flex-direction: column;
+        vertical-align: middle;
+        width: 100%;
+        margin: auto;
+    }
+    .notes {
+        margin-left: 35px;
+    }
+}
+

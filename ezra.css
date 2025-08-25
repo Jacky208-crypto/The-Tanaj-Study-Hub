@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.select {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+#ezra-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 10px 15px;
+    border: 2px solid #333;
+    background: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #f0f0f0;
+}
+
+button.active {
+    background: #333;
+    color: white;
+}
+
+#content {
+    border-top: 2px solid #333;
+    padding-top: 20px;
+}
+
+.chapter-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.verse {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.verse-number {
+    font-weight: bold;
+    color: #666;
+    margin-right: 8px;
+}  
+
+.loading {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    padding: 40px;
+}
+
+.error {
+    text-align: center;
+    color: #d32f2f;
+    padding: 40px;
+}
+
+.back-button {
+    margin-bottom: 15px;
+}
+
+.back-button button {
+    background: #666;
+    color: white;
+}
+
+.back-button button:hover {
+    background: #555;
+} 
