@@ -1,2 +1,2 @@
 # The-Tanaj-Study-Hub
-A place to learn Jewish Texts more modernly
+A place that makes Jewish texts more accessible and modern.
